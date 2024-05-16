@@ -1,0 +1,121 @@
+// custom-theme.scss
+@use '@angular/material' as mat;
+
+$deep-space-black: #1B1B1F;
+$electric-blue: #3A86FF;
+$vibrant-green: #4CAF50;
+$soft-grey: #E0E0E0;
+$sunset-orange: #FF5722;
+
+$my-primary: mat.define-palette((
+  50: $soft-grey,
+  100: $soft-grey,
+  200: $soft-grey,
+  300: $soft-grey,
+  400: $soft-grey,
+  500: $electric-blue,
+  600: $electric-blue,
+  700: $electric-blue,
+  800: $electric-blue,
+  900: $electric-blue,
+  A100: $electric-blue,
+  A200: $electric-blue,
+  A400: $electric-blue,
+  A700: $electric-blue,
+  contrast: (
+    50: $deep-space-black,
+    100: $deep-space-black,
+    200: $deep-space-black,
+    300: $deep-space-black,
+    400: $deep-space-black,
+    500: $deep-space-black,
+    600: $deep-space-black,
+    700: $deep-space-black,
+    800: $deep-space-black,
+    900: $deep-space-black,
+    A100: $deep-space-black,
+    A200: $deep-space-black,
+    A400: $deep-space-black,
+    A700: $deep-space-black,
+  )
+));
+
+$my-accent: mat.define-palette((
+  50: $soft-grey,
+  100: $soft-grey,
+  200: $soft-grey,
+  300: $soft-grey,
+  400: $soft-grey,
+  500: $vibrant-green,
+  600: $vibrant-green,
+  700: $vibrant-green,
+  800: $vibrant-green,
+  900: $vibrant-green,
+  A100: $vibrant-green,
+  A200: $vibrant-green,
+  A400: $vibrant-green,
+  A700: $vibrant-green,
+  contrast: (
+    50: $deep-space-black,
+    100: $deep-space-black,
+    200: $deep-space-black,
+    300: $deep-space-black,
+    400: $deep-space-black,
+    500: $deep-space-black,
+    600: $deep-space-black,
+    700: $deep-space-black,
+    800: $deep-space-black,
+    900: $deep-space-black,
+    A100: $deep-space-black,
+    A200: $deep-space-black,
+    A400: $deep-space-black,
+    A700: $deep-space-black,
+  )
+));
+
+$my-warn: mat.define-palette((
+  50: $soft-grey,
+  100: $soft-grey,
+  200: $soft-grey,
+  300: $soft-grey,
+  400: $soft-grey,
+  500: $sunset-orange,
+  600: $sunset-orange,
+  700: $sunset-orange,
+  800: $sunset-orange,
+  900: $sunset-orange,
+  A100: $sunset-orange,
+  A200: $sunset-orange,
+  A400: $sunset-orange,
+  A700: $sunset-orange,
+  contrast: (
+    50: $deep-space-black,
+    100: $deep-space-black,
+    200: $deep-space-black,
+    300: $deep-space-black,
+    400: $deep-space-black,
+    500: $deep-space-black,
+    600: $deep-space-black,
+    700: $deep-space-black,
+    800: $deep-space-black,
+    900: $deep-space-black,
+    A100: $deep-space-black,
+    A200: $deep-space-black,
+    A400: $deep-space-black,
+    A700: $deep-space-black,
+  )
+));
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.core-theme($my-theme);
+@include mat.all-component-themes($my-theme);
+
