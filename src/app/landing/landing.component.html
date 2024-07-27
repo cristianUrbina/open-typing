@@ -1,14 +1,48 @@
 <div class="landing-wrapper">
-  <div class="landing-header" [ngStyle]="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(' + currentBackgroundImage + ')'}">
+  <div
+    class="landing-header"
+    [ngStyle]="{
+      'background-image':
+        'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(' +
+        currentBackgroundImage +
+        ')'
+    }"
+  >
     <div class="landing-header-content">
       <h1>Open Typing</h1>
-      <p>Practice your typing with <i><strong>real</strong></i> code snippets!</p>
+      <p>
+        Practice your typing with <i><strong>real</strong></i> code snippets!
+      </p>
     </div>
-    <div class="landing-header-button">
-      <button mat-raised-button color="warn">
-        <mat-icon>start</mat-icon>
-        Start
-      </button>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="selectedLanguage">
+        <mat-select-trigger>
+          <img
+            *ngIf="getSelectedOption()"
+            [src]="getSelectedOption().image"
+            alt="{{ getSelectedOption().label }}"
+            width="20"
+            height="20"
+            style="margin-right: 8px"
+          />
+          {{ getSelectedOption().label }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          <img
+            [src]="option.image"
+            alt="{{ option.label }}"
+            width="20"
+            height="20"
+            style="margin-right: 8px"
+          />
+          {{ option.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button routerLink="/typing-session" routerLinkActive="active" mat-raised-button color="warn" >
+      <mat-icon>start</mat-icon>
+      Start
+    </button>
   </div>
 </div>

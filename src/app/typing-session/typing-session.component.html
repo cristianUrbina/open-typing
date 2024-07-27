@@ -1,0 +1,12 @@
+<div>
+  <h3>Code Snippet for {{ selectedLanguage.toUpperCase() }}</h3>
+  <pre>
+    <code>
+      <span *ngFor="let char of characters; let i = index" [ngClass]="{'active': isActive(i)}">{{ char }}</span>
+    </code>
+  </pre>
+</div>
+
+<div>
+  <input [(ngModel)]="userInput" (input)="checkTyping($event)" />
+</div>

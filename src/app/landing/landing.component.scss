@@ -1,6 +1,7 @@
 .landing-wrapper {
   .landing-header {
     display: flex;
+    flex-flow: column;
     font-size: 2rem;
     justify-content: center;
     align-items: center;

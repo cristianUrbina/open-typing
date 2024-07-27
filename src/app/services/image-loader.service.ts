@@ -8,7 +8,7 @@ export class ImageLoaderService {
   private images: string[] = [
     'assets/images/keyboards/moonlander-white.jpg',
     'assets/images/keyboards/typingmachine.jpg',
-    // Add more images here
+    'assets/images/keyboards/random-mechanical-keyboard.jpg',
   ];
 
   getImages(): string[] {

@@ -1,0 +1,7 @@
+
+def reverse_string(s):
+    return s[::-1]
+
+if __name__ == "__main__":
+    word = "OpenAI"
+    print(reverse_string(word))  # Output: IAnepO
