@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HostListener } from '@angular/core';
+import { TypingGameService } from '../services/typing-game-service/typing-game.service';
+import { capitalizeFirstLetter } from '../../utils/string-utils';
 
 @Component({
   selector: 'app-typing-session',
@@ -12,49 +14,45 @@ import { HostListener } from '@angular/core';
   styleUrl: './typing-session.component.scss'
 })
 export class TypingSessionComponent {
-  selectedLanguage = "javascript";
-  codeSnippet: string = '';
-  userInput: string = '';
-  current = 0;
+  lang: string = '';
+  wpm: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public gameService: TypingGameService) { }
 
-  getCodeSnippet(){
-    let filePath = `assets/code-snippets/${this.selectedLanguage}.txt`;
+  getCodeSnippet() {
+    let filePath = `assets/code-snippets/${this.lang}.txt`;
 
     this.http.get(filePath, { responseType: 'text' })
       .subscribe({
         next: (snippet) => {
-          this.codeSnippet = snippet;
+          this.gameService.setCodeSnippet(snippet);
         },
         error: (err) => {
           console.error("Error fetching code snippet", err);
-          this.codeSnippet = "Error loading snippet.";
+          this.gameService.setCodeSnippet("Error loading snippet.");
         }
       });
+    setTimeout(() => {
+      this.wpm = this.gameService.calculateWPM();
+    }, 1000)
   }
 
-  checkTyping(e: Event) {
-
+  get characters(): string[] {
+    return this.gameService.characters;
   }
 
-  ngOnInit() {
-    this.getCodeSnippet();
-  }
-
-  handleKeyPress() {
-
-  }
-
-  get characters() : string[] {
-    return this.codeSnippet.trim().split('');
-  }
-
-  isActive(index: number) : boolean {
-    return this.current == index;
+  get capitalizedLang(): string {
+    return capitalizeFirstLetter(this.lang);
   }
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
+    this.gameService.processInput(event)
+  }
+
+  @Input()
+  set language(language: string) {
+    this.lang = language;
+    this.getCodeSnippet()
   }
 }

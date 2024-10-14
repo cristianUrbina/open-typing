@@ -4,5 +4,5 @@ import { LandingComponent } from './landing/landing.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent }
-  , { path: 'typing-session', component: TypingSessionComponent }
+  , { path: 'typing-session/:language', component: TypingSessionComponent }
 ];
