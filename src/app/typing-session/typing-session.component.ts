@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HostListener } from '@angular/core';
@@ -9,7 +9,7 @@ import { capitalizeFirstLetter } from '../../utils/string-utils';
 @Component({
   selector: 'app-typing-session',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './typing-session.component.html',
   styleUrl: './typing-session.component.scss'
 })
