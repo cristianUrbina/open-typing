@@ -1,0 +1,20 @@
+<div class="page">
+  <h2>Open Typing</h2>
+  <div class="main">
+    <h3 class="lang-name">{{ capitalizedLang }}</h3>
+    <div class="typing-wrapper">
+      <div class="code-box">
+        <pre><code><span *ngFor="let char of characters; let i = index" [ngClass]="{'active': this.gameService.isActive(i)}">{{ char }}</span></code></pre>
+      </div>
+      <div class="score-viewer">
+        WPM: {{ this.gameService.WPM }}
+        <br />
+        Time left: {{ gameService.calculateRemainingTime() }}
+        <br />
+        Correct: {{ this.gameService.correctChars }} char
+        <br />
+        Incorrect: {{ this.gameService.incorrectChars }} char
+      </div>
+    </div>
+  </div>
+</div>

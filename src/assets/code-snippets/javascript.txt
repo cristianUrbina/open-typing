@@ -1,0 +1,13 @@
+
+function fibonacci(n) {
+    let a = 0, b = 1, temp;
+    while (n > 0) {
+        temp = a;
+        a = b;
+        b = temp + b;
+        n--;
+    }
+    return a;
+}
+
+console.log(fibonacci(10)); // Output: 55

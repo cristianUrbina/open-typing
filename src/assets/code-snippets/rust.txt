@@ -1,0 +1,13 @@
+fn is_even(n: i32) -> bool {
+    n % 2 == 0
+}
+
+fn main() {
+    for i in 0..10 {
+        if is_even(i) {
+            println!("{} is even", i);
+        } else {
+            println!("{} is odd", i);
+        }
+    }
+}

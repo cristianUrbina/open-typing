@@ -6,6 +6,7 @@ import { ImageLoaderService } from '../services/image-loader.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -18,6 +19,9 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
     , MatFormFieldModule
     , FormsModule
     , ReactiveFormsModule
+    , RouterOutlet
+    , RouterLink
+    , RouterLinkActive
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
