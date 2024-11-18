@@ -84,6 +84,7 @@ export class TypingGameService {
 
   endGame() {
     alert("Congratulations you ended this snippet");
+    this.timer.stop();
   }
 
   isComplete(): boolean {
