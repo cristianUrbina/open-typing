@@ -40,7 +40,11 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button [routerLink]="['/typing-session', selectedLanguage]" routerLinkActive="active" mat-raised-button color="warn" >
+    <button
+      [routerLink]="['/typing-session', selectedLanguage]"
+      routerLinkActive="active"
+      mat-raised-button
+    >
       <mat-icon>start</mat-icon>
       Start
     </button>
