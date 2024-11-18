@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { HostListener } from '@angular/core';
 import { TypingGameService } from '../services/typing-game-service/typing-game.service';
 import { capitalizeFirstLetter } from '../../utils/string-utils';
+import { MatChipsModule } from '@angular/material/chips';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-typing-session',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatChipsModule],
   templateUrl: './typing-session.component.html',
   styleUrl: './typing-session.component.scss'
 })
@@ -17,24 +19,24 @@ export class TypingSessionComponent {
   lang: string = '';
   wpm: number = 0;
 
-  constructor(private http: HttpClient, public gameService: TypingGameService) { }
+  constructor(private backend: BackendService, public gameService: TypingGameService) { }
 
-  getCodeSnippet() {
-    let filePath = `assets/code-snippets/${this.lang}.txt`;
+  @Input()
+  set language(language: string) {
+    this.lang = language;
+    this.getAndSetSnippet();
+  }
 
-    this.http.get(filePath, { responseType: 'text' })
+  getAndSetSnippet() {
+    this.backend.getCodeSnippet(this.lang)
       .subscribe({
         next: (snippet) => {
           this.gameService.setCodeSnippet(snippet);
         },
         error: (err) => {
           console.error("Error fetching code snippet", err);
-          this.gameService.setCodeSnippet("Error loading snippet.");
         }
       });
-    setTimeout(() => {
-      this.wpm = this.gameService.calculateWPM();
-    }, 1000)
   }
 
   get characters(): string[] {
@@ -50,9 +52,4 @@ export class TypingSessionComponent {
     this.gameService.processInput(event)
   }
 
-  @Input()
-  set language(language: string) {
-    this.lang = language;
-    this.getCodeSnippet()
-  }
 }
