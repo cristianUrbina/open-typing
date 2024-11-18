@@ -17,6 +17,7 @@ import { BackendService } from '../services/backend.service';
 })
 export class TypingSessionComponent {
   lang: string = '';
+  langImgUrl: string = '';
   wpm: number = 0;
 
   constructor(private backend: BackendService, public gameService: TypingGameService) { }
@@ -31,7 +32,8 @@ export class TypingSessionComponent {
     this.backend.getCodeSnippet(this.lang)
       .subscribe({
         next: (snippet) => {
-          this.gameService.setCodeSnippet(snippet);
+          this.gameService.setCodeSnippet(snippet.code);
+          this.langImgUrl = snippet.langImgUrl;
         },
         error: (err) => {
           console.error("Error fetching code snippet", err);
