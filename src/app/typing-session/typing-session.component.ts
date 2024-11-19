@@ -26,6 +26,7 @@ export class TypingSessionComponent {
   set language(language: string) {
     this.lang = language;
     this.getAndSetSnippet();
+    localStorage.setItem('preferredLanguage', language);
   }
 
   getAndSetSnippet() {

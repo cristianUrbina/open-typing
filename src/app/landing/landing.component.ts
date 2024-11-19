@@ -49,6 +49,10 @@ export class LandingComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.images = this.imageLoaderService.getImages();
     this.startImageRotation();
+    const preferredLanguage = localStorage.getItem('preferredLanguage');
+    if (preferredLanguage) {
+      this.selectedLanguage = preferredLanguage;
+    }
   }
 
   startImageRotation(): void {
