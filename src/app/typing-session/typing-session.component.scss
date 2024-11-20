@@ -12,11 +12,11 @@ code {
 }
 
 .correct {
-  color: green;
+  background-color: #E6F7E1;
 }
 
-.isMisstyped {
-  color: red;
+.incorrect-typed {
+  background-color: #F8D7DA;
 }
 
 .active {
