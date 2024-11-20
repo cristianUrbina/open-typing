@@ -11,7 +11,7 @@
       </mat-chip>
     <div class="typing-wrapper">
       <div class="code-box">
-        <pre><code><span *ngFor="let char of characters; let i = index" [ngClass]="{'active': this.gameService.isActive(i)}">{{ char }}</span></code></pre>
+        <pre><code><span *ngFor="let char of characters; let i = index" [ngClass]="{'active': this.gameService.isActive(i), 'isMisstyped': this.gameService.isMisstyped(i)}">{{ char }}</span></code></pre>
       </div>
       <div class="score-viewer">
         WPM: {{ this.gameService.WPM }}

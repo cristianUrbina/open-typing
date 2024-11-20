@@ -7,15 +7,14 @@ import { CountdownTimer } from './countdown-timer';
 })
 export class TypingGameService {
   private codeSnippet = '';
-  private current = 0;
   private correctlyTypedCharsCount = 0;
   private incorrectlyTypedCharsCount = 0;
-  private inputTyped: string = '';
+  private inputTyped: string[] = [];
+  private correctedInput: string[] = [];
   public WPM: number = 0;
   public timer = new CountdownTimer(60);
 
   start() {
-    this.current = 0;
     this.timer.start();
     this.setWPMPeriodically()
   }
@@ -46,25 +45,27 @@ export class TypingGameService {
   }
 
   isActive(index: number): boolean {
-    return this.current === index;
+    return this.correctedInput.length === index;
   }
 
   processInput(event: KeyboardEvent) {
     if (!this.timer.startTime) {
       this.start();
     }
-    event.preventDefault();
-    event.stopPropagation();
     const key: string = event.key;
-    if (this.isComplete()) {
+    if (key === 'Shift' || this.isComplete()) {
       return;
     }
-    this.inputTyped += key;
-    const target = this.characters[this.current];
+    if(key === 'Backspace' && this.inputTyped.length > 0) {
+      this.correctedInput = this.correctedInput.slice(0, -1);
+      return;
+    }
+    const target = this.characters[this.correctedInput.length];
+    this.inputTyped.push(key);
+    this.correctedInput.push(key);
     const isCorrect = key === target || (key === 'Enter' && target === '\n');
 
     if (isCorrect) {
-      this.current += 1;
       this.correctlyTypedCharsCount += 1;
     } else {
       this.incorrectlyTypedCharsCount += 1;
@@ -72,12 +73,14 @@ export class TypingGameService {
 
     // Go to the first character after newline
     if (key === 'Enter' && target === '\n') {
-      while (this.current < this.characters.length && this.characters[this.current] == ' ') {
-        this.current++;
+      while (this.correctedInput.length < this.characters.length && this.characters[this.correctedInput.length] === ' ') {
+        console.log(this.correctedInput.length);
+        console.log(this.characters[this.correctedInput.length])
+        this.correctedInput.push(' ');
       }
     }
 
-    if (this.current == this.characters.length) {
+    if (this.correctedInput.length == this.characters.length) {
       this.endGame();
     }
   }
@@ -88,7 +91,7 @@ export class TypingGameService {
   }
 
   isComplete(): boolean {
-    return this.current >= this.codeSnippet.length;
+    return this.correctedInput.length >= this.codeSnippet.length;
   }
 
   calculateWPM(): number {
@@ -99,5 +102,9 @@ export class TypingGameService {
       return 0;
     }
     return wordsTyped / minutes;
+  }
+
+  isMisstyped(i: number): boolean {
+    return this.correctedInput.length > i && this.correctedInput[i] !== this.codeSnippet[i];
   }
 }

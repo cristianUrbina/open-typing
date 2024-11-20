@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HostListener } from '@angular/core';
@@ -50,7 +49,7 @@ export class TypingSessionComponent {
     return capitalizeFirstLetter(this.lang);
   }
 
-  @HostListener('document:keypress', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     this.gameService.processInput(event)
   }
