@@ -6,7 +6,7 @@
       {{ capitalizedLang }}
     </mat-chip>
     <div class="typing-wrapper">
-      <div class="editor"></div>
+      <div #editorContainer class="editor"></div>
       <div class="score-viewer">
         WPM: {{ this.gameService.WPM }}
         <br />

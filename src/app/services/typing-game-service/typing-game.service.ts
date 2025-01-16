@@ -28,7 +28,6 @@ export class TypingGameService {
 
   set codeSnippet(snippet: string) {
     this._snippet = CodeCleaner.clean(snippet);
-    console.log(this._snippet);
   }
 
   get codeSnippet() {
