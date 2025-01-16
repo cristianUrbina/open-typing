@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { go } from "@codemirror/lang-go";
@@ -27,6 +27,7 @@ export class TypingSessionComponent {
   langImgUrl: string = '';
   wpm: number = 0;
   myView: EditorView | undefined;
+  @ViewChild('editorContainer') editor: ElementRef | undefined;
 
   constructor(private backend: BackendService, public gameService: TypingGameService) { }
 
@@ -71,8 +72,6 @@ export class TypingSessionComponent {
   }
 
   createEditorView(): void {
-    const codeEditor = document.querySelector('.editor');
-    const parent = codeEditor ?? document.body;
     const languageExtension = this.createLanguageExtension();
     const createDecorations = this.createDecorations.bind(this);
     const backgroundField = StateField.define({
@@ -91,7 +90,7 @@ export class TypingSessionComponent {
     });
 
     const keyboardEventCatcher = EditorView.domEventHandlers({
-      keydown: (event, view) => this.handleKeyboardEvent(event, view),
+      keydown: (event, view) => this.handleKeyboardEvent(event, view)
     })
 
     this.myView = new EditorView({
@@ -105,8 +104,9 @@ export class TypingSessionComponent {
         languageExtension,
         backgroundField,
       ],
-      parent: parent
+      parent: this.editor?.nativeElement
     });
+    this.myView.focus();
   }
 
   getBackgroundColor(pos: number) {
@@ -148,7 +148,6 @@ export class TypingSessionComponent {
 
   handleKeyboardEvent(event: KeyboardEvent, view: EditorView) {
     this.gameService.processInput(event);
-    event.preventDefault();
     const curr = this.gameService.getCurrent()
     view.dispatch({
       effects: triggerUpdate.of(null)
@@ -160,5 +159,4 @@ export class TypingSessionComponent {
     )
     return true
   }
-
 }
