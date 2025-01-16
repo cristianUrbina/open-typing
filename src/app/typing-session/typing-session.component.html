@@ -1,18 +1,12 @@
 <div class="page">
   <h2>Open Typing</h2>
   <div class="main">
-      <mat-chip>
-        <img
-          matChipAvatar
-          [src]="langImgUrl"
-          alt="Programming language logo"
-        />
-        {{ capitalizedLang }}
-      </mat-chip>
+    <mat-chip>
+      <img matChipAvatar [src]="langImgUrl" alt="Programming language logo" />
+      {{ capitalizedLang }}
+    </mat-chip>
     <div class="typing-wrapper">
-      <div class="code-box">
-        <pre><code><span *ngFor="let char of characters; let i = index" [ngClass]="{'active': this.gameService.isActive(i), 'incorrect-typed': this.gameService.isMisstyped(i), 'correct': this.gameService.isCorrect(i)}">{{ char }}</span></code></pre>
-      </div>
+      <div #editorContainer class="editor"></div>
       <div class="score-viewer">
         WPM: {{ this.gameService.WPM }}
         <br />

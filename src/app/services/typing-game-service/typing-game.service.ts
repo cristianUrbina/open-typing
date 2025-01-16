@@ -6,7 +6,7 @@ import { CountdownTimer } from './countdown-timer';
   providedIn: 'root'
 })
 export class TypingGameService {
-  private codeSnippet = '';
+  private _snippet = '';
   private correctlyTypedCharsCount = 0;
   private incorrectlyTypedCharsCount = 0;
   private inputTyped: string[] = [];
@@ -26,8 +26,12 @@ export class TypingGameService {
     return this.incorrectlyTypedCharsCount;
   }
 
-  setCodeSnippet(snippet: string) {
-    this.codeSnippet = CodeCleaner.clean(snippet);
+  set codeSnippet(snippet: string) {
+    this._snippet = CodeCleaner.clean(snippet);
+  }
+
+  get codeSnippet() {
+    return this._snippet;
   }
 
   start() {
@@ -46,6 +50,10 @@ export class TypingGameService {
 
   isActive(index: number): boolean {
     return this.correctedInput.length === index;
+  }
+
+  getCurrent(): number {
+    return this.correctedInput.length;
   }
 
   processBackspace(): boolean {
