@@ -1,12 +1,21 @@
 <div class="page">
-  <h2>Open Typing</h2>
+  <h2 routerLink="/">Open Typing</h2>
   <div class="main">
     <mat-chip>
       <img matChipAvatar [src]="langImgUrl" alt="Programming language logo" />
       {{ capitalizedLang }}
     </mat-chip>
+    @if (gameService.hasFinished()) {
+      <button mat-raised-button (click)="restart()">
+        <mat-icon>restart_alt</mat-icon>
+      </button>
+    }
+    <app-typing-editor
+      #typingEditor
+      [language]="lang"
+      [code]="gameService.codeSnippet"
+    />
     <div class="typing-wrapper">
-      <div #editorContainer class="editor"></div>
       <div class="score-viewer">
         WPM: {{ this.gameService.WPM }}
         <br />

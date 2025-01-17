@@ -33,6 +33,10 @@ export class CountdownTimer {
     return this._startTime;
   }
 
+  hasFinished(): boolean {
+    return this._startTime !== undefined && this.intervalId === undefined;
+  }
+
   stop() {
     if (this.intervalId !== undefined) {
       window.clearInterval(this.intervalId);

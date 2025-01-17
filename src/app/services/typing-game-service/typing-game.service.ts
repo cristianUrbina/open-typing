@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CodeCleaner } from './code-cleaner';
 import { CountdownTimer } from './countdown-timer';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class TypingGameService {
   private correctlyTypedCharsCount = 0;
   private incorrectlyTypedCharsCount = 0;
   private inputTyped: string[] = [];
-  private correctedInput: string[] = [];
+  private correctedInputSource = new BehaviorSubject<string[]>([]);
+  public correctedInput$ = this.correctedInputSource.asObservable();
   public WPM: number = 0;
   public timer = new CountdownTimer(60);
 
@@ -49,16 +51,28 @@ export class TypingGameService {
   }
 
   isActive(index: number): boolean {
-    return this.correctedInput.length === index;
+    return this.getCurrent() === index;
+  }
+
+  setCorrectedInput(value: string[]) {
+      this.correctedInputSource.next(value);
+  }
+
+  getCorrectedInput() {
+    return this.correctedInputSource.getValue();
   }
 
   getCurrent(): number {
-    return this.correctedInput.length;
+    return this.correctedInputSource.getValue().length;
+  }
+
+  pushChar(value: string): void {
+    this.correctedInputSource.next([...this.getCorrectedInput(), value]);
   }
 
   processBackspace(): boolean {
     if (this.inputTyped.length > 0) {
-      this.correctedInput = this.correctedInput.slice(0, -1);
+      this.setCorrectedInput(this.getCorrectedInput().slice(0, -1));
       return true;
     }
     return false;
@@ -75,9 +89,9 @@ export class TypingGameService {
     if (key === 'Backspace' && this.processBackspace()) {
       return;
     }
-    const target = this.characters[this.correctedInput.length];
+    const target = this.characters[this.getCurrent()];
     this.inputTyped.push(key);
-    this.correctedInput.push(key);
+    this.pushChar(key);
     const isCorrect = key === target || (key === 'Enter' && target === '\n');
 
     if (isCorrect) {
@@ -88,8 +102,9 @@ export class TypingGameService {
 
     // Go to the first character after newline
     if (key === 'Enter' && target === '\n') {
-      while (this.correctedInput.length < this.characters.length && this.characters[this.correctedInput.length] === ' ') {
-        this.correctedInput.push(' ');
+      while (this.getCurrent() < this.characters.length && this.characters[this.getCurrent()] === ' ') {
+        // this.getCorrectedInput().push(' ');
+        this.pushChar(' ')
       }
     }
 
@@ -109,15 +124,15 @@ export class TypingGameService {
   }
 
   isMisstyped(i: number): boolean {
-    return this.correctedInput.length > i && this.correctedInput[i] !== this.codeSnippet[i];
+    return this.getCurrent() > i && this.getCorrectedInput()[i] !== this.codeSnippet[i];
   }
 
   isCorrect(i: number): boolean {
-    return  this.hasBeenTyped(i) && this.correctedInput[i] === this.codeSnippet[i];
+    return this.hasBeenTyped(i) && this.getCorrectedInput()[i] === this.codeSnippet[i];
   }
 
   hasBeenTyped(i: number): boolean {
-    return this.correctedInput.length > i;
+    return this.getCurrent() > i;
   }
 
   endGame() {
@@ -126,16 +141,33 @@ export class TypingGameService {
   }
 
   isComplete(): boolean {
-    return this.correctedInput.length >= this.codeSnippet.length;
+    return this.getCurrent() >= this.codeSnippet.length;
   }
 
   getAccuracy() {
-    return Math.trunc((this.correctlyTypedCharsCount / this.inputTyped.length)*100);
+    return Math.trunc((this.correctlyTypedCharsCount / this.inputTyped.length) * 100);
   }
 
   getGameSummary() {
     return {
       accuracy: this.getAccuracy()
     };
+  }
+
+  hasFinished(): boolean {
+    return this.timer.hasFinished()
+  }
+
+  restart() {
+    this.resetVariables();
+  }
+
+  private resetVariables(): void {
+    this.correctlyTypedCharsCount = 0;
+    this.incorrectlyTypedCharsCount = 0;
+    this.inputTyped = [];
+    this.setCorrectedInput([]);
+    this.WPM = 0;
+    this.timer = new CountdownTimer(60);
   }
 }
