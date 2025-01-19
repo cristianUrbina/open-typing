@@ -11,9 +11,247 @@
     background-position: center;
     background-repeat: no-repeat;
     transition: background-image 1s ease-in-out;
+    margin-bottom: 50px;
 
     .landing-header-content {
       color: white;
     }
   }
+
+  .landing-text {
+    margin: auto;
+    width: 50%;
+  }
+}
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.features-section {
+  background: #121212;
+  color: white;
+  text-align: center;
+
+  .features-container {
+    margin: 0 auto;
+
+    .features-list {
+      list-style: none;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: fit-content;
+        transition: background-color 0.1s ease;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        span {
+          color: #4caf50;
+          font-size: 1.5rem;
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 60px 20px;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-section .subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-tracks: center;
+  gap: 8px;
+  background-color: #ff4081;
+  color: white;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.cta-button mat-icon {
+  font-size: 1.5rem; /* Adjust icon size */
+  vertical-align: middle;
+}
+
+.cta-button:hover {
+  background-color: #e91e63;
+}
+
+/* Sections */
+section {
+  padding: 50px 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Features Grid */
+.features-grid,
+.audience-grid,
+.steps-grid,
+.testimonials-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.features-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.feature,
+.audience,
+.step,
+.testimonial {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Testimonials */
+.testimonials-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.testimonial .author {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+/* Newsletter */
+.newsletter-section input {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.newsletter-section button {
+  padding: 10px 20px;
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.newsletter-section button:hover {
+  background-color: #1a5edb;
+}
+
+/* Footer */
+.footer {
+  background: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social-links a {
+  color: #ff4081;
+  margin: 0 10px;
+}
+
+.audience-section {
+  background-color: #f8f9fa;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.audience {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.audience:hover,
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature {
+  transition: transform 0.3s ease;
+}
+
+.audience h3 {
+  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.audience p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.option-icon {
+  height: 20px;
+  width: 20px;
+  margin-right: 8px;
 }

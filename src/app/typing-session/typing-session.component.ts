@@ -52,4 +52,8 @@ export class TypingSessionComponent {
     this.editor.restart();
   }
 
+  ngOnDestroy() {
+    this.gameService.destroy();
+    this.gameService.restart();
+  }
 }

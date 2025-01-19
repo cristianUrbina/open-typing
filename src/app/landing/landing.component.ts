@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ImageLoaderService } from '../services/image-loader.service';
+import { MatCardModule } from '@angular/material/card'
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CustomCardComponent } from '../custom-card/custom-card.component';
 
 @Component({
   selector: 'app-landing',
@@ -22,6 +24,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     , RouterOutlet
     , RouterLink
     , RouterLinkActive
+    , MatCardModule
+    , CustomCardComponent
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'

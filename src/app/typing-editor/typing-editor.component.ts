@@ -34,12 +34,13 @@ export class TypingEditorComponent {
   @Input()
   set code(doc: string) {
     this._doc = doc;
-    if (this._doc !== undefined) {
+
+    if (this.gameService.codeSnippet !== "") {
       this.createEditorView();
     }
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.gameService.correctedInput$.subscribe((_) => {
       const curr = this.gameService.getCurrent();
       this.editorView?.dispatch(
@@ -145,5 +146,10 @@ export class TypingEditorComponent {
   handleKeyboardEvent(event: KeyboardEvent, view: EditorView) {
     this.gameService.processInput(event);
     return true
+  }
+
+  ngOnDestroy() {
+    this.editorView?.destroy();
+    // this._doc = undefined;
   }
 }

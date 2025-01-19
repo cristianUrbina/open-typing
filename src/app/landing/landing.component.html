@@ -1,52 +1,230 @@
-<div class="landing-wrapper">
-  <div
-    class="landing-header"
-    [ngStyle]="{
-      'background-image':
-        'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(' +
-        currentBackgroundImage +
-        ')'
-    }"
-  >
-    <div class="landing-header-content">
-      <h1>Open Typing</h1>
+<!-- app.component.html -->
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>🚀 Welcome to OpenTyping</h1>
       <p>
-        Practice your typing with <i><strong>real</strong></i> code snippets!
+        Trying to improve your code typing skills? But wait… is that the same
+        snippet from last week?👀
       </p>
+      <p>
+        Not with OpenTyping! Practice your typing with
+        <i><strong>recent</strong> & <strong>real</strong></i> code snippets! No
+        repeats, no déjà vu, just fresh challenges every time!.
+      </p>
+      <mat-form-field appearance="fill">
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selectedLanguage">
+          <mat-select-trigger>
+            <img
+              *ngIf="getSelectedOption()"
+              [src]="getSelectedOption().image"
+              alt="{{ getSelectedOption().label }}"
+              class="option-icon"
+            />
+            {{ getSelectedOption().label }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let option of options" [value]="option.value">
+            <img
+              [src]="option.image"
+              alt="{{ option.label }}"
+              class="option-icon"
+            />
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <a
+          [routerLink]="['/typing-session', selectedLanguage]"
+          routerLinkActive="active"
+          class="cta-button"
+          >Start Practicing for Free <mat-icon>start</mat-icon></a
+        >
+      </div>
     </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Select an option</mat-label>
-      <mat-select [(value)]="selectedLanguage">
-        <mat-select-trigger>
-          <img
-            *ngIf="getSelectedOption()"
-            [src]="getSelectedOption().image"
-            alt="{{ getSelectedOption().label }}"
-            width="20"
-            height="20"
-            style="margin-right: 8px"
-          />
-          {{ getSelectedOption().label }}
-        </mat-select-trigger>
-        <mat-option *ngFor="let option of options" [value]="option.value">
-          <img
-            [src]="option.image"
-            alt="{{ option.label }}"
-            width="20"
-            height="20"
-            style="margin-right: 8px"
-          />
-          {{ option.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button
-      [routerLink]="['/typing-session', selectedLanguage]"
-      routerLinkActive="active"
-      mat-raised-button
-    >
-      <mat-icon>start</mat-icon>
-      Start
-    </button>
-  </div>
+  </section>
+
+  <!-- Why OpenTyping Section -->
+  <section class="why-section">
+    <div class="container">
+      <h2>💻 Why OpenTyping?</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <h3>Fresh & ready snippets every week!</h3>
+          <p>Brand new code snippets available every week!</p>
+        </div>
+        <div class="feature">
+          <h3>Open Source Code</h3>
+          <p>
+            Practice typing with actual code from popular open-source projects.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Any language, any time</h3>
+          <p>
+            Choose your preferred programming language and focus on mastering
+            its syntax.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Gamified Learning</h3>
+          <p>
+            Earn badges, level up, and compete on leaderboards to stay
+            motivated.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="features-container">
+      <h2>✨ Features</h2>
+      <ul class="features-list">
+        <li><span>✔</span> Editor-like typing tool</li>
+        <li><span>✔</span> Multi-Language Support</li>
+        <li><span>✔</span> Error Highlighting</li>
+        <li><span>✔</span> Real-time Metrics & Statistics</li>
+        <li><span>✔</span> Progress Tracking</li>
+        <!-- <li>Customizable Difficulty</li> -->
+        <!-- <li>Dark Mode</li> -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- Who Is It For Section -->
+  <section class="audience-section">
+    <div class="container">
+      <h2>🎯 Who Is It For?</h2>
+      <div class="audience-grid">
+        <div class="audience">
+          <h3>Beginners</h3>
+          <p>Get comfortable with coding syntax and typing.</p>
+        </div>
+        <div class="audience">
+          <h3>Experienced Developers</h3>
+          <p>Sharpen your skills and improve efficiency.</p>
+        </div>
+        <div class="audience">
+          <h3>Open Source Enthusiasts</h3>
+          <p>Familiarize yourself with popular open-source projects.</p>
+        </div>
+        <div class="audience">
+          <h3>Curious Minds</h3>
+          <p>If you just want to know what code looks like.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section">
+    <div class="container">
+      <h2>📈 How It Works</h2>
+      <div class="steps-grid">
+        <div class="step">
+          <h3>1. Choose Your Language</h3>
+          <p>Select from a wide range of programming languages.</p>
+        </div>
+        <div class="step">
+          <h3>2. Pick a Snippet</h3>
+          <p>Browse snippets by difficulty, framework, or repository.</p>
+        </div>
+        <div class="step">
+          <h3>3. Start Typing</h3>
+          <p>Type the code as accurately and quickly as possible.</p>
+        </div>
+        <div class="step">
+          <h3>4. Review & Improve</h3>
+          <p>Get instant feedback on your speed and accuracy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <!-- <section class="testimonials-section"> -->
+  <!--   <div class="container"> -->
+  <!--     <h2>🌟 Testimonials</h2> -->
+  <!--     <div class="testimonials-grid"> -->
+  <!--       <div class="testimonial"> -->
+  <!--         <p> -->
+  <!--           "OpenTyping helped me improve my typing speed and get -->
+  <!--           comfortable with React code. It’s like having a coding mentor!" -->
+  <!--         </p> -->
+  <!--         <p class="author">– Sarah, Frontend Developer</p> -->
+  <!--       </div> -->
+  <!--       <div class="testimonial"> -->
+  <!--         <p> -->
+  <!--           "I love practicing with real-world code snippets. It’s way more -->
+  <!--           effective than random text!" -->
+  <!--         </p> -->
+  <!--         <p class="author">– Alex, Full-Stack Engineer</p> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </section> -->
+
+  <!-- Call to Action Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>🚀 Get Started Now!</h2>
+      <p>
+        Ready to level up your coding skills? Start typing with real-world code
+        snippets today!
+      </p>
+      <a routerLink="/practice" class="cta-button">Start Practicing for Free</a>
+    </div>
+  </section>
+
+  <!-- Contribute Section -->
+  <!-- <section class="contribute-section"> -->
+  <!--   <div class="container"> -->
+  <!--     <h2>💡 Contribute to the Community</h2> -->
+  <!--     <p> -->
+  <!--       OpenTyping is powered by open-source contributions. Submit your -->
+  <!--       favorite snippets or improve the engine on GitHub. -->
+  <!--     </p> -->
+  <!--     <a -->
+  <!--       href="https://github.com/OpenTyping" -->
+  <!--       target="_blank" -->
+  <!--       class="cta-button" -->
+  <!--       >Contribute on GitHub</a -->
+  <!--     > -->
+  <!--   </div> -->
+  <!-- </section> -->
+
+  <!-- Newsletter Section -->
+  <!-- <section class="newsletter-section"> -->
+  <!--   <div class="container"> -->
+  <!--     <h2>📧 Stay Updated</h2> -->
+  <!--     <p> -->
+  <!--       Sign up for our newsletter to get the latest updates, new features, -->
+  <!--       and coding tips. -->
+  <!--     </p> -->
+  <!-- <form (ngSubmit)="onSubscribe()"> -->
+  <!-- <input type="email" placeholder="Enter your email" [(ngModel)]="email" name="email" required /> -->
+  <!-- <button type="submit">Subscribe Now</button> -->
+  <!-- </form> -->
+  <!--   </div> -->
+  <!-- </section> -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 OpenTyping. All rights reserved.</p>
+      <nav>
+        <a routerLink="/privacy-policy">Privacy Policy</a>
+        <a routerLink="/terms-of-service">Terms of Service</a>
+      </nav>
+      <div class="social-links">
+        <a href="https://github.com/cristianUrbina/open-typing" target="_blank"
+          >GitHub</a
+        >
+      </div>
+    </div>
+  </footer>
 </div>

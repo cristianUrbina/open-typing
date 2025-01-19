@@ -170,4 +170,8 @@ export class TypingGameService {
     this.WPM = 0;
     this.timer = new CountdownTimer(60);
   }
+
+  destroy() {
+    this.codeSnippet = "";
+  }
 }
