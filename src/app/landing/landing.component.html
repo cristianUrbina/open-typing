@@ -176,7 +176,12 @@
         Ready to level up your coding skills? Start typing with real-world code
         snippets today!
       </p>
-      <a routerLink="/practice" class="cta-button">Start Practicing for Free</a>
+      <a
+        [routerLink]="['/typing-session', selectedLanguage]"
+        routerLinkActive="active"
+        class="cta-button"
+        >Start Practicing for Free</a
+      >
     </div>
   </section>
 

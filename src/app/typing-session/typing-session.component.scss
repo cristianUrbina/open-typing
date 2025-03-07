@@ -1,38 +1,59 @@
-code {
-  font-family: "Roboto";
-  font-size: 1.2rem;
-}
-
-.lang-name {
-  color: white;
-  background-color: gray;
-  width: fit-content;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-h2 {
-  text-align: center;
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .main {
-  margin-left: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .typing-wrapper {
-    display: flex;
-    justify-content: space-around;
-    align-items: start;
-    .editor {
-      flex: 9 1;
-      border: 1px solid #d3d3d3;
-      width: 100px;
-    }
-    .score-viewer {
-      flex: 1 1;
-      padding: 15px;
-      border: solid 1px gray;
-      height: fit-content;
-      width: 100px;
-    }
-  }
+.typing-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+app-typing-editor {
+  width: 100vw;
+  height: calc(100vh - 40px);
+}
+
+.score-container {
+  position: fixed;
+  top: calc(50%);
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.score-item {
+  margin-bottom: 10px;
+}
+
+.language-chip {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 40px;
+  margin-left: 10px;
+}
+
+.chip-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  z-index: 10;
+  margin: 10px;
 }

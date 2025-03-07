@@ -34,7 +34,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   public options = [
     { value: 'go', label: 'Go', image: 'assets/images/go-logo.png' },
     { value: 'rust', label: 'Rust', image: 'assets/images/rust-logo.png' },
-    { value: 'javascript', label: 'Javascript', image: 'assets/images/javascript-logo.png' },
+    { value: 'js', label: 'Javascript', image: 'assets/images/javascript-logo.png' },
     { value: 'python', label: 'Python', image: 'assets/images/python-logo.png' },
   ];
 

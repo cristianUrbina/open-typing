@@ -1,29 +1,47 @@
 <div class="page">
-  <h2 routerLink="/">Open Typing</h2>
   <div class="main">
-    <mat-chip>
-      <img matChipAvatar [src]="langImgUrl" alt="Programming language logo" />
-      {{ capitalizedLang }}
-    </mat-chip>
-    @if (gameService.hasFinished()) {
-      <button mat-raised-button (click)="restart()">
-        <mat-icon>restart_alt</mat-icon>
-      </button>
-    }
-    <app-typing-editor
-      #typingEditor
-      [language]="lang"
-      [code]="gameService.codeSnippet"
-    />
     <div class="typing-wrapper">
-      <div class="score-viewer">
-        WPM: {{ this.gameService.WPM }}
-        <br />
-        Time left: {{ gameService.calculateRemainingTime() }}
-        <br />
-        Correct: {{ this.gameService.correctChars }} char
-        <br />
-        Incorrect: {{ this.gameService.incorrectChars }} char
+      <!-- Typing editor with fixed width -->
+      <app-typing-editor
+        #typingEditor
+        [language]="lang"
+        [code]="gameService.codeSnippet"
+      ></app-typing-editor>
+
+      <div class="chip-container">
+        <mat-chip class="language-chip">
+          <img
+            matChipAvatar
+            [src]="langImgUrl"
+            alt="Programming language logo"
+          />
+          {{ capitalizedLang }}
+        </mat-chip>
+        <div *ngIf="gameService.hasFinished()">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="restart()"
+            class="restart-btn"
+            class="language-chip"
+          >
+            <mat-icon>restart_alt</mat-icon> Restart
+          </button>
+      </div>
+      </div>
+    </div>
+
+    <!-- Fixed position for score container -->
+    <div class="score-container">
+      <div class="score-item"><strong>WPM:</strong> {{ gameService.WPM }}</div>
+      <div class="score-item">
+        <strong>Time left:</strong> {{ gameService.calculateRemainingTime() }}
+      </div>
+      <div class="score-item">
+        <strong>Correct:</strong> {{ gameService.correctChars }} char
+      </div>
+      <div class="score-item">
+        <strong>Incorrect:</strong> {{ gameService.incorrectChars }} char
       </div>
     </div>
   </div>
